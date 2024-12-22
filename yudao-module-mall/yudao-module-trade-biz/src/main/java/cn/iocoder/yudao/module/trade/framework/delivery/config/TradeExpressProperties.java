@@ -39,6 +39,14 @@ public class TradeExpressProperties {
     @Valid
     private Kd100Config kd100;
 
+    public void setClient(String clientCode) {
+        try {
+            this.client = ExpressClientEnum.valueOf(clientCode.replace("-", "_").toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("未知的快递客户端配置: " + clientCode);
+        }
+    }
+
     /**
      * 快递鸟配置项目
      */
